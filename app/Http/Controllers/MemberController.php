@@ -130,13 +130,16 @@ class MemberController extends Controller
     }
     public function cetakMember(Request $request)
     {
-        $datamember = collect(array());
-        foreach ($request->id_member as $id) {
-            $member = Member::find($id);
-            $datamember[] = $member;
-        }
+        // dd($request->all());
+        $data['cetak'] = Member::find($request->id);
+        // $datamember = collect(array());
+        // foreach ($request->id_member as $id) {
+        //     $member = Member::find($id);
+        //     $datamember[] = $member;
+        // }
 
-        $datamember = $datamember->chunk(2);
+        // $datamember = $datamember->chunk(2);
+
         $setting    = Setting::first();
 
         $no  = 1;

@@ -183,41 +183,26 @@ Daftar Produk
     $(document).on('click', '#bulk_delete', function() {
         var id = [];
         console.log($('#select_allx:checked').val());
-        if (confirm("Are you sure you want to Delete this data?")) {
-            $('.form-produk:checked').each(function() {
+        if (confirm("pilih lebih dari 1 data")) {
+            $('input[name="id_produk[]"]:checked').each(function() {
                 id.push($(this).val());
             });
-            if (id.length > 0) {
+            if (id.length > 1) {
+                // (confirm("Yakin mau menghapus beberpa data ?"))
                 $.ajax({
                     url: "{{ route('produk.delete_selected')}}",
                     method: "post",
                     data: {
-                        id: id
+                        id: id,
+                        _token: '{{csrf_token();}}'
                     },
                     success: function(data) {
                         alert(data);
                         $('#produk_table').DataTable().ajax.reload();
                     }
                 });
-            } else {
-                alert("Please select atleast one checkbox");
             }
         }
-        // if ($('input:checked').length > 1) {
-        //     if (confirm('Yakin ingin menghapus data terpilih?')) {
-        //         $.post(url, $('.form-produk').serialize())
-        //             .done((response) => {
-        //                 table.ajax.reload();
-        //             })
-        //             .fail((errors) => {
-        //                 alert('Tidak dapat menghapus data');
-        //                 return;
-        //             });
-        //     }
-        // } else {
-        //     alert('Pilih data yang akan dihapus');
-        //     return;
-        // }
     });
 
     function cetakBarcode(url) {

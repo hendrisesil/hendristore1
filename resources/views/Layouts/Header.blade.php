@@ -19,28 +19,26 @@
                 <!-- Messages: style can be found in dropdown.less-->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <!-- <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
-                        <img src="{{asset('img/hendristore3.jpeg')}}" class="img-circle" alt="User Image" width="17">
-                        <span class="hidden-xs">{{auth()->user()->name}}</span>
+                        <img src="{{ url(auth()->user()->foto ?? '/') }}" class="user-image img-profil" alt="User Image">
+                        <span class="hidden-xs">{{ auth()->user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <!-- <img src="{{asset('/AdminLTE-2/dist/img/user2-160x160.jpg')}}" alt="User Image"> -->
-                            <img src="{{asset('img/hendristore3.jpeg')}}" class="img-circle" alt="User Image" width="150">
+                            <img src="{{ url(auth()->user()->foto ?? '/') }}" class="img-circle img-profil" alt="User Image">
 
                             <p>
-                                {{auth()->user()->name}}- {{auth()->user()->email}}
+                                {{ auth()->user()->name }} - {{ auth()->user()->email }}
                             </p>
                         </li>
 
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="{{ route('user.profil') }}" class="btn btn-default btn-flat">Profil</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat" onclick="document.getElementById('logout-form').submit()">Keluar</a>
+                                <a href="#" class="btn btn-default btn-flat" onclick="$('#logout-form').submit()">Keluar</a>
                             </div>
                         </li>
                     </ul>

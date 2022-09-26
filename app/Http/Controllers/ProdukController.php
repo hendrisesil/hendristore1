@@ -80,7 +80,7 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         // ini adalah syntax untuk menyimpan data produk baru setelah klik simpan
-        $produk = Produk::latest()->first() ?? new Produk;
+        $produk = Produk::latest()->first() ?? new Produk();
         $request['kode_produk'] = 'P' . tambah_nol_didepan((int)$produk->id_produk + 1, 6);
         $produk = Produk::create($request->all());
 
@@ -142,14 +142,9 @@ class ProdukController extends Controller
     }
     public function deleteSelected(Request $request)
     {
-        // foreach ($request->id_produk as $id) {
-        //     $produk = Produk::find($id);
-        //     $produk->delete();
-        // }
-        // return response(null, 204);
-        $produk_array = $request->id_produk;
+        $produk_array = $request->id;
         $produk = Produk::whereIn('id_produk', $produk_array);
-        dd($produk);
+        // dd($produk);
         if ($produk->delete()) {
             echo 'Data Delete';
         }

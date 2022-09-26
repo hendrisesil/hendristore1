@@ -1,12 +1,12 @@
 @extends('Layouts.Master')
 
 @section('title')
-Member
+Supplier
 @endsection
 
 @section('breadcrumb')
 @parent
-<li class="active"> Daftar Member</li>
+<li class="active"> Daftar Supplier</li>
 @endsection
 
 @section('content')
@@ -16,27 +16,19 @@ Member
     <div class="col-md-12">
         <div class="box">
             <div class="box-header with-border">
-                <button href="{{route('member.store')}}" onclick="addForm()" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah Member</button>
-                <a href="{{route('member.cetak_member')}}" class="btn btn-info btn-xs btn-flat"><i class="fa fa-id-card"></i> Cetak Member</a>
+                <button href="{{route('supplier.store')}}" onclick="addForm()" class="btn btn-success btn-xs btn-flat"><i class="fa fa-plus-circle"></i> Tambah Supplier</button>
             </div>
             <!-- /.box-header -->
             <div class="box-body table-responsive">
-                <form action="" method="post" class="form-member">
-                    @csrf
-                    <table class="table table-stiped table-bordered">
-                        <thead>
-                            <th width="5%">
-                                <input type="checkbox" name="select_all" id="select_all">
-                            </th>
-                            <th width="5%">No</th>
-                            <th>Kode</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>Telpon</th>
-                            <th width="15%"><i class="fa fa-cog"></i></th>
-                        </thead>
-                    </table>
-                </form>
+                <table class="table table-stiped table-bordered">
+                    <thead>
+                        <th width="5%">No</th>
+                        <th>Nama</th>
+                        <th>Telepon</th>
+                        <th>Alamat</th>
+                        <th width="15%"><i class="fa fa-cog"></i></th>
+                    </thead>
+                </table>
             </div>
         </div>
         <!-- /.box -->
@@ -58,19 +50,12 @@ Member
             serverSide: true,
             autoWidth: false,
             ajax: {
-                url: "{{route('member.data')}}",
+                url: "{{route('supplier.data')}}",
             },
             columns: [{
-                    data: 'select_all',
-                    searchable: false,
-                    sortable: false
-                }, {
                     data: 'DT_RowIndex',
                     searchable: false,
                     sortable: false
-                },
-                {
-                    data: 'kode_member'
                 },
                 {
                     data: 'nama'
@@ -148,18 +133,6 @@ Member
                     alert('Tidak dapat menghapus data');
                     return;
                 });
-        }
-    }
-
-    function cetakMember(url) {
-        if ($('input:checked').length < 1) {
-            alert('Pilih data yang akan dicetak');
-            return;
-        } else {
-            $('.form-member')
-                .attr('target', '_blank')
-                .attr('action', url)
-                .submit();
         }
     }
 </script>
